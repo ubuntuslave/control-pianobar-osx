@@ -36,14 +36,17 @@ controlpianobar="$fold/control-pianobar.sh"
 
 # Also place the pandora.jpg file in the same folder, or modify de
 # following variable.
-blankicon="$fold/pandora.jpg"
+blankicon="pandora.png"
 
 # Some of the following was copied from eventcmd.sh
 if [[ "$fold" == "/pianobar" ]]; then
     fold="$HOME/.config/pianobar"
-    blankicon="$fold""$blankicon"
+    blankicon="$fold/""$blankicon"
 fi
-notify="notify-send --hint=int:transient:1"
+# For Linux:
+# notify="notify-send --hint=int:transient:1"
+# For Growl in OS X:
+notify="growlnotify"
 zenity="zenity"
 logf="$fold/log"
 ctlf="$fold/ctl"
@@ -85,7 +88,9 @@ else
 fi
 
 if [[ $songDuration -gt 10 ]]; then
-    echo -e "\-$played/$duration \t $playpause
+    # ORIGINAL was:  
+    # echo -e "\-$played/$duration \t $playpause
+    echo -e "-$played/$duration
 Album: $album
 Station: $stationName" > "$ds"
 else
@@ -113,7 +118,7 @@ case "$1" in
 		  echo "$fold/albumart/$icon" > $an
 	   fi
 
-	   $notify -t 7000 -i "`cat $an`" "`cat $np`" "`cat $ds`"
+	   $notify --image "`cat $an`" -t "`cat $np`" -m "`cat $ds`"
 	   echo "" > "$logf"
 
 	   if [[ -e "$su" ]]; then
@@ -124,30 +129,30 @@ case "$1" in
     songexplain)
 	   cp "$ds" "$dse"
 	   tail -1 "$logf" | grep --text "(i) We're" | sed 's/.*(i).*features/*/' | sed 's/,/\n*/g' | sed 's/and \([^,]*\)\./\n* \1/' | sed 's/\* many other similarities.*/* and more./' >> "$dse"
-	   $notify -t 15000 -i "`cat $an`" "`cat $np`" "`cat $dse`";;
+	   $notify --image "`cat $an`" -t "`cat $np`" -m "`cat $dse`";;
     
     songlove)
 	   if [[ -e "$ine" ]]; then
-		  $notify -t 2500 "Song Liked" ""
+		  $notify -t "Song Liked" ""
 		  rm -f "$ine"
 	   else
-		  $notify -t 2500 -i "`cat $an`" "Song Liked" "$artist - $title"
+		  $notify --image "`cat $an`" -t "Song Liked" -m "$artist - $title"
 	   fi;;
     
     songban)
 	   if [[ -e "$ine" ]]; then
-		  $notify -t 2500 "Song Banned" ""
+		  $notify -t "Song Banned" ""
 		  rm -f "$ine"
 	   else
-		  $notify -t 2500 -i "`cat $an`" "Song Banned" "$artist - $title"
+		  $notify --image "`cat $an`" -t "Song Banned" -m "$artist - $title"
 	   fi;;
     
     songshelf)
 	   if [[ -e "$ine" ]]; then
-		  $notify -t 2500 "Song Put Away" ""
+		  $notify -t "Song Put Away" ""
 		  rm -f "$ine"
 	   else
-		  $notify -t 2500 -i "`cat $an`" "Song Put Away" "$artist - $title"
+		  $notify --image "`cat $an`" -t "Song Put Away" -m "$artist - $title"
 	   fi;;
     
     stationfetchplaylist)
@@ -165,8 +170,8 @@ case "$1" in
     
     userlogin)
 	   if [ "$pRet" -ne 1 ]; then
-		  $notify -t 1500 "Login ERROR 1" "$pRetStr"
-		  $notify -t 6000 "Restart Tor" "This is probably a proxy problem. If tor and polipo are running and configured, restart tor and try again."
+		  $notify -t "Login ERROR 1" -m "$pRetStr" --image "$blankicon"
+		  $notify -t "Restart Tor" -m "This is probably a proxy problem. If tor and polipo are running and configured, restart tor and try again." --image "$blankicon"
 		  # $notify -t 6000 "Restarting Tor" "Input root password, wait a few seconds, and try running pianobar again."
             # sleep 1.5
 		  # xterm -e sudo rc.d restart tor && $notify -t 1000 "Success!"
@@ -176,9 +181,9 @@ case "$1" in
 		# $notify "Success" "I think it worked. Try running pianobar again."
 		# fi
 	   elif [ "$wRet" -ne 1 ]; then
-		  $notify "Login ERROR 2" "$wRetStr"
+		  $notify -t "Login ERROR 2" -m "$wRetStr" --image "$blankicon"
 	   else
-		  $notify -t 2000 "Login Successful" "Fetching Stations..."
+		  $notify  -t "Login Successful" -m "Fetching Stations..." --image "$blankicon"
 	   fi
 	   ;;
     
@@ -187,10 +192,10 @@ case "$1" in
     
     *)
 	   if [ "$pRet" -ne 1 ]; then
-		  $notify -i "$blankicon" "Pianobar - ERROR" "$1 failed: $pRetStr"
+		  $notify --image "$blankicon" -t "Pianobar - ERROR" -m "$1 failed: $pRetStr"
 	   elif [ "$wRet" -ne 1 ]; then
-		  $notify -i "$blankicon" "Pianobar - ERROR" "$1 failed: $wRetStr"
+		  $notify --image "$blankicon" -t "Pianobar - ERROR" -m "$1 failed: $wRetStr"
 	   else
-		  $notify -i "$blankicon" "$1" "fill $2"
+		  $notify --image "$blankicon" -t "$1" -m "fill $2"
 	   fi;;
 esac
