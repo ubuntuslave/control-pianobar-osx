@@ -1,4 +1,4 @@
-[control-pianobar-osx](http://ubuntuslave.github.io/control-pianobar-osx/)
+[control-pianobar-osx](https://github.com/ubuntuslave/control-pianobar-osx)
 ================
 
 ## Description
