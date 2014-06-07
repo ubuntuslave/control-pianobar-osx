@@ -18,23 +18,25 @@ Go there if you require to use this in Linux derivatives!
 
     $ brew install pianobar
 
-##### Possible Problems:
-    - if the dylib is broken, for instance with p11-kit, just reinstall the lib (brew uninstall p11-kit && brew install p11-kit)
-    - if `guile` cannot find `GNU libtool`, it might not be linked properly, so run `$ brew unlink libtool && brew link libtool`
-      - Then, reinstall `gnutls` as following
-       
-              $ brew rm gnutls & brew install gnutls $(brew options gnutls | grep -E '^--with-' - | tr '\n' ' ')
-              
-    - Missing header `neaacdec.h`, you need to install the **AAC decoder** that comes in `faad2`, it may not be linked
-        
-              $ brew unlink faad2 && brew link faad2
+##### Some Problems' Troubleshooting
+- if the dylib is broken, for instance with p11-kit, just reinstall the lib (brew uninstall p11-kit && brew install p11-kit)
+- if `guile` cannot find `GNU libtool`, it might not be linked properly, so run `$ brew unlink libtool && brew link libtool`
+  - Then, reinstall `gnutls` as following
+   
+        $ brew rm gnutls & brew install gnutls $(brew options gnutls | grep -E '^--with-' - | tr '\n' ' ')
+          
+- Missing header `neaacdec.h`, you need to install the **AAC decoder** that comes in `faad2`, it may not be linked
     
-    - Sometimes, this is an issue (only realized by using --verbose mode), so reinstall the *mad* package:
-    
-              $ brew rm mad & brew install mad
-    - Runtime missing library:
-    
-              $ brew unlink json-c && brew link json-c                   
+        $ brew unlink faad2 && brew link faad2
+
+- Sometimes, this is an issue (only realized by using --verbose mode), so reinstall the *mad* package:
+
+        $ brew rm mad & brew install mad
+          
+- Runtime missing library:
+
+        $ brew unlink json-c && brew link json-c                   
+
 
 #### From source
 Getting *pianobar* from [the pianobar project at github](https://github.com/PromyLOPh/pianobar/) and follow their instructions
