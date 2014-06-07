@@ -32,7 +32,7 @@ fold="$XDG_CONFIG_HOME/pianobar"
 
 # You should also place the control-pianobar.sh script in the
 # config folder (or modify the following variable accordingly).
-controlpianobar="$fold/control-pianobar.sh"
+controlpianobar="control-pianobar.sh"
 
 # Also place the pandora.jpg file in the same folder, or modify de
 # following variable.
