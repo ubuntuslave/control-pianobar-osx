@@ -64,5 +64,10 @@ ps axc|awk "{if (\$5==\"$1\") print \$1}";
 
 Refer to the [original project's website](http://bruce-connor.github.io/control-pianobar/) for clearer instructions on how to use `control-pianobar` or do key bindings to your keys.
 
+In a nutshell: I use [BetterTouchTool](http://bettertouchtool.net) to keybind the commands (***not working directly with the bash scripts command) so I made individual *AppleScript* applications for each command. For example,
+
+    tell application "Terminal"
+        do script ("~/.config/pianobar/control-pianobar.sh switchstation;") in window 1
+    end tell
 
 
