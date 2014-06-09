@@ -58,6 +58,7 @@ su="$fold/showupcoming"
 stl="$fold/stationlist"
 ip="$fold/isplaying"
 ine="$fold/ignextevent"
+fst="$fold/firsttimekeeper"
 
 while read L; do
     k="`echo "$L" | cut -d '=' -f 1`"
@@ -133,7 +134,7 @@ case "$1" in
     
     songlove)
 	   if [[ -e "$ine" ]]; then
-		  $notify -t "Song Liked" ""
+		  $notify -t "Song Liked" "" --image $blankicon
 		  rm -f "$ine"
 	   else
 		  $notify --image "`cat $an`" -t "Song Liked" -m "$artist - $title"
@@ -141,7 +142,7 @@ case "$1" in
     
     songban)
 	   if [[ -e "$ine" ]]; then
-		  $notify -t "Song Banned" ""
+	  $notify -t "Song Banned" "" --image $blankicon
 		  rm -f "$ine"
 	   else
 		  $notify --image "`cat $an`" -t "Song Banned" -m "$artist - $title"
@@ -149,7 +150,7 @@ case "$1" in
     
     songshelf)
 	   if [[ -e "$ine" ]]; then
-		  $notify -t "Song Put Away" ""
+		  $notify -t "Song Put Away" "" --image $blankicon
 		  rm -f "$ine"
 	   else
 		  $notify --image "`cat $an`" -t "Song Put Away" -m "$artist - $title"
@@ -165,7 +166,11 @@ case "$1" in
 			 echo "$stnum) "$(eval "echo \$station$stnum") >> "$stl"
 		  done
 	   fi
+	   if [[ "$(cat $fst)" == 1 ]]; then    
 	   echo "$($zenity --entry --title="Switch Station" --text="$(cat "$stl")")" > "$ctlf"
+	   else
+       echo "1" > "$fst"   
+       fi
 	   ;;
     
     userlogin)
