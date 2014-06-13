@@ -43,7 +43,11 @@ Getting *pianobar* from [the pianobar project at github](https://github.com/Prom
 
 ### Setting up *control-pianobar*
 
-1. Get the two *bash* scripts and simply put them and pandora.jpg (or any other icon) in your *~/.config/pianobar/* folder
+1. Get the two *bash* scripts and put them and pandora.jpg (or any other icon) in your *~/.config/pianobar/* folder
+1. Create a symbolic link to `control-painobar.sh` from your `~/bin` directory or other folder in your `PATH` variable
+
+        ln -s ~/.config/pianobar/control-pianobar.sh ~/bin/
+    
 1. Install Requirements
   1. Install the `growlnotify` command by getting it from [http://growl.info/downloads](http://growl.info/downloads)
   2. Install the `zenity` and `wget` commands from Homebrew, such as 
