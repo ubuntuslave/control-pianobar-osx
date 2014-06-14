@@ -70,8 +70,22 @@ Refer to the [original project's website](http://bruce-connor.github.io/control-
 
 In a nutshell: I use [BetterTouchTool](http://bettertouchtool.net) to keybind the commands (***not working directly with the bash scripts command) so I made individual *AppleScript* applications for each command. For example,
 
-    tell application "Terminal"
-        do script ("~/.config/pianobar/control-pianobar.sh switchstation;") in window 1
+In particular, for the initial play script, this works fine for me:
+
+    tell application "System Events"
+        if (count (processes whose bundle identifier is "com.apple.Terminal")) is 0 then
+            tell application "/Applications/Utilities/Terminal.app"
+                do script "~/.config/pianobar/control-pianobar.sh p;" in window 0
+            end tell
+        else
+            tell application "/Applications/Utilities/Terminal.app"
+                do script "~/.config/pianobar/control-pianobar.sh p; exit;"
+            end tell
+        end if
     end tell
 
+For any other control option, like `next`, the *AppleScript* would like as follows:
 
+    tell application "Terminal"
+        do script ("~/.config/pianobar/control-pianobar.sh next; exit;")
+    end tell
