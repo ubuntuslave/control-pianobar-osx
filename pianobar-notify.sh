@@ -47,7 +47,7 @@ fi
 # notify="notify-send --hint=int:transient:1"
 # For Growl in OS X:
 notify="growlnotify"
-zenity="zenity"
+cocoadialog="/opt/homebrew-cask/Caskroom/cocoadialog/2.1.1/CocoaDialog.app/Contents/MacOS/CocoaDialog"
 logf="$fold/log"
 ctlf="$fold/ctl"
 an="$fold/artname"
@@ -167,7 +167,7 @@ case "$1" in
 		  done
 	   fi
 	   if [[ "$(cat $fst)" == 1 ]]; then    
-	   echo "$($zenity --entry --title="Switch Station" --text="$(cat "$stl")")" > "$ctlf"
+     echo "$($cocoadialog inputbox --button1 'OK' --button2 'Cancel' --title "Switch Station" --informative-text "$(cat "$stl")" | sed '1d')" > "$ctlf"
 	   else
        echo "1" > "$fst"   
        fi
