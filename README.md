@@ -6,6 +6,8 @@
 This is a fork from [control-pianobar](http://bruce-connor.github.io/control-pianobar/)
 that I hacked a little bit in order to make it work with [pianobar](http://6xq.net/projects/pianobar/) and *Growl* in OS X
 
+**UPDATE 12/29/15:** I've improved support in El Capitan by porting zenity to the seemingly-better-supported CocoaDialog.
+
 The original project can be found at
 [http://bruce-connor.github.io/control-pianobar/](http://bruce-connor.github.io/control-pianobar/).
 Go there if you require to use this in Linux derivatives!
@@ -50,9 +52,11 @@ Getting *pianobar* from [the pianobar project at github](https://github.com/Prom
     
 1. Install Requirements
   1. Install the `growlnotify` command by getting it from [http://growl.info/downloads](http://growl.info/downloads)
-  2. Install the `zenity` and `wget` commands from Homebrew, such as 
+  2. Install `wget` from Homebrew and `cocoadialog` from homebrew-cask:
       
-        `$ brew install wget zenity`
+        `$ brew install wget Caskroom/cask/cocoadialog`
+
+1. Verify path to `cocoadialog` binary in `~/.config/pianobar/control-pianobar.sh`
 
 1. Make a `pidof` script with
             
