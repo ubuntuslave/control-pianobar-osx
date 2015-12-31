@@ -6,7 +6,7 @@
 This is a fork from [control-pianobar](http://bruce-connor.github.io/control-pianobar/)
 that I hacked a little bit in order to make it work with [pianobar](http://6xq.net/projects/pianobar/) and *Growl* in OS X
 
-**UPDATE 12/29/15:** I've improved support in El Capitan by porting zenity to the seemingly-better-supported CocoaDialog.
+**UPDATE 12/29/15:** Improved support in El Capitan by porting zenity to the seemingly-better-supported [CocoaDialog](http://mstratman.github.io/cocoadialog/).
 
 The original project can be found at
 [http://bruce-connor.github.io/control-pianobar/](http://bruce-connor.github.io/control-pianobar/).
@@ -52,21 +52,22 @@ Getting *pianobar* from [the pianobar project at github](https://github.com/Prom
     
 1. Install Requirements
   1. Install the `growlnotify` command by getting it from [http://growl.info/downloads](http://growl.info/downloads)
-  2. Install `wget` from Homebrew and `cocoadialog` from homebrew-cask:
+  1. Install `wget` from Homebrew and `cocoadialog` from homebrew-cask:
       
-        `$ brew install wget Caskroom/cask/cocoadialog`
+        $ brew install wget Caskroom/cask/cocoadialog
 
-1. Verify path to `cocoadialog` binary in `~/.config/pianobar/control-pianobar.sh`
+  1. Verify path to `cocoadialog` binary in `~/.config/pianobar/control-pianobar.sh`
 
-1. Make a `pidof` script with
+  1. Make a `pidof` script with
             
-```
-#!/bin/bash
-ps axc|awk "{if (\$5==\"$1\") print \$1}";
-```
+    ```
+    #!/bin/bash
+    ps axc|awk "{if (\$5==\"$1\") print \$1}";
+    ```
 
-  1. Make it executable with `$ chmod a+x pidof`
-  2. Save it somewhere in your `$PATH` locations so it can be found
+    1. Make it executable with `$ chmod a+x pidof`
+  
+    1. Save it somewhere in your `$PATH` locations so it can be found
 
 ### Usage
 
